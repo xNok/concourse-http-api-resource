@@ -19,24 +19,32 @@ Most of the `source` options can also be used in `params` for the specifc action
 
 Options set in `params` take precedence over options in `source`.
 
+Create the HTTP request
 * `uri`: *Required.* The URI to use for the requests.
     Example: `https://www.hipchat.com/v2/room/1234321/notification`
-
 * `method`: *Optional* Method to use, eg: GET, POST, PATCH (default `GET`).
-
-* `headers`: *Optional* Object containing headers to pass to the request.
+* `headers`: *Optional* List `key=value` containing headers to pass to the request, or path to the file containing those infomations
     Example:
 
         headers:
             X-Some-Header: some header content
 
-* `json`: *Optional* JSON to send along with the request, set `application/json` header.
+    OR
 
+        headers: path/to/header
+* `json`: *Optional* JSON to send along with the request, set `application/json` header. (can be inline or file path)
+* `form_data`: *Optional* List with form field/value pairs to send as data OR . Values are converted to JSON and URL-encoded.    Example:
+
+        form_data:
+            X: Y
+
+    OR
+
+        form_data: path/to/form_data
+
+Configuration:
 * `debug`: *Optional* Set debug logging of scripts, takes boolean (default `false`).
-
 * `ssl_verify`: *Optional* Boolean or SSL CA content (default `true`).
-
-* `form_data`: *Optional* Dictionary with form field/value pairs to send as data. Values are converted to JSON and URL-encoded.
 
 ## Behavior
 
