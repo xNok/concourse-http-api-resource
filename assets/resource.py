@@ -25,27 +25,27 @@ class HTTPResource:
         # Configuration
         ssl_verify = data.get('ssl_verify', True)
         ok_responses = data.get('ok_responses', [200, 201, 202, 204])
-        
+
         if isinstance(ssl_verify, bool):
             verify = ssl_verify
         elif isinstance(ssl_verify, str):
             verify = str(tempfile.NamedTemporaryFile(delete=False, prefix='ssl-').write(verify))
 
         # Processing datas
-        if isinstance(json_data, basestring):
+        if isinstance(json_data, str):
             with open(json_data, 'r') as myfile:
-                json_data=myfile.read()
-        
-        if isinstance(headers, basestring):
+                json_data = myfile.read()
+
+        if isinstance(headers, str):
             with open(headers, 'r') as myfile:
-                headers=myfile.read()
+                headers = myfile.read()
 
         request_data = None
         if form_data:
             # if strinf -> data are in a file
-            if isinstance(form_data, basestring):
+            if isinstance(form_data, str):
                 with open(form_data, 'r') as myfile:
-                    form_data=myfile.read()
+                    form_data = myfile.read()
 
             request_data = {k: json.dumps(v, ensure_ascii=False) for k, v in form_data.items()}
 
